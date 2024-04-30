@@ -60,48 +60,66 @@ struct Node {
 class Solution
 {
     public:
-    Node *reverseList(Node *head)
-    {
-        Node *prev = NULL, *current = head, *next = NULL;
-        while (current != NULL)
-        {
-            next = current->next;
-            current->next = prev;
-            prev = current;
-            current = next;
+    int sum(int n, struct Node* n1, struct Node* n2, struct Node* ans){
+        if(n1->next==NULL){
+            ans->next=NULL;
+            return n1->data + n2->data;
         }
-        return prev;
+        struct Node* t=new Node(0);
+        ans->next=t;
+        int temp=sum(n-1, (n1->next), (n2->next), (ans->next));
+        ans->next->data=temp%10;
+        return n1->data + n2->data + (temp/10);
     }
     //Function to add two numbers represented by linked list.
-    struct Node* addTwoLists(struct Node* first, struct Node* second)
+    struct Node* addTwoLists(struct Node* num1, struct Node* num2)
     {
-         first = reverseList(first);
-        second = reverseList(second);
-
-        Node *res = NULL; 
-        Node *temp, *prev = NULL;
-        int carry = 0, sum;
-
-        while (first != NULL || second != NULL)
-        {
-            sum = carry + (first ? first->data : 0) + (second ? second->data : 0);
-            carry = (sum >= 10) ? 1 : 0;
-            sum = sum % 10;
-            temp = new Node(sum);
-            if (res == NULL)
-                res = temp;
-            else
-                prev->next = temp; 
-            if (first)
-                first = first->next;
-            if (second)
-                second = second->next;
-            prev = temp; 
+        int n=0, m=0;
+        struct Node* t=num1;
+        
+        while(t!=NULL){
+            n++;
+            t=t->next;
         }
-        if (carry > 0)
-            temp->next = new Node(carry);
-        res = reverseList(res);
-        return res;
+        t=num2;
+        while(t!=NULL){
+            m++;
+            t=t->next;
+        }
+        
+        int c;
+        if(n>m){
+            c=n-m;
+            while(c--){
+                t=new Node(0);
+                t->next=num2;
+                num2=t;
+                t=NULL;
+            }
+            m=n;
+        }
+        else if(n<m){
+            c=m-n;
+            while(c--){
+                t=new Node(0);
+                t->next=num1;
+                num1=t;
+                t=NULL;
+            }
+            n=m;
+        }
+        
+        struct Node* ans=new Node(0);
+        c=sum(n, num1, num2, ans);
+        ans->data=c%10;
+        t= new Node(c/10);
+        t->next=ans;
+        ans=t;
+        
+        while(ans->next!=NULL && ans->data==0){
+            ans=ans->next;
+        }
+        return ans;
         // code here
     }
 };
@@ -118,12 +136,12 @@ int main()
         int n, m;
         
         cin>>n;
-        Node* first = buildList(n);
+        Node* num1 = buildList(n);
         
         cin>>m;
-        Node* second = buildList(m);
+        Node* num2 = buildList(m);
         Solution ob;
-        Node* res = ob.addTwoLists(first,second);
+        Node* res = ob.addTwoLists(num1,num2);
         printList(res);
     }
     return 0;
