@@ -11,12 +11,17 @@ public:
 	// Function to check if array has 2 elements
 	// whose sum is equal to the given value
 	bool hasArrayTwoCandidates(int arr[], int n, int x) {
-	    unordered_map<int,int>mp;
-	    for(int i=0;i<n;i++){
-	        if(mp.find(x-arr[i])!=mp.end()){
+	    sort(arr,arr+n);
+	    int l=0,r=n-1;
+	    while(l<r){
+	        int target=arr[l]+arr[r];
+	        if(target==x){
 	            return true;
+	        }else if(target>x){
+	            r--;
+	        }else{
+	            l++;
 	        }
-	        mp[arr[i]]++;
 	    }
 	    return false;
 	    // code here
