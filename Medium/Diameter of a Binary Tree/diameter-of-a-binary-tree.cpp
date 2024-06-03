@@ -93,29 +93,22 @@ struct Node
 
 class Solution {
   public:
+  int height(Node* node){
+      if(node==NULL){
+          return 0;
+      }
+      int left=height(node->left);
+      int right=height(node->right);
+      ans=max(ans,(1+left+right));
+      return 1+max(left,right);
+  }
+  int ans=0;
     // Function to return the diameter of a Binary Tree.
-    
     int diameter(Node* root) {
-        int result = 0;
-        height(root, result);
-        return result;
-    }
-    
-    // Helper function to calculate the height and update the result
-    int height(Node* root, int& result) {
-        if (!root) {
-            return 0;
+        height(root);
+        return ans;
         }
         
-        int leftHeight = height(root->left, result);
-        int rightHeight = height(root->right, result);
-        
-        // Calculate the diameter passing through the current node
-        result = max(result, leftHeight + rightHeight + 1);
-        
-        // Return the height of the subtree rooted at the current node
-        return 1 + max(leftHeight, rightHeight);
-    }
         // Your code here
     
 };
