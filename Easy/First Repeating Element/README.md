@@ -1,4 +1,4 @@
-<h2><a href="https://www.geeksforgeeks.org/problems/first-repeating-element4018/1?page=5&sortBy=submissions">First Repeating Element</a></h2><h3>Difficulty Level : Easy</h3><hr><div class="problems_problem_content__Xm_eO"><p><span style="font-size:18px">Given an array arr[] of size n, find the first repeating element. The element should occur more than once and the index of its first occurrence should be the smallest.</span></p>
+<h2><a href="https://www.geeksforgeeks.org/problems/first-repeating-element4018/1">First Repeating Element</a></h2><h3>Difficulty Level : Easy</h3><hr><div class="problems_problem_content__Xm_eO"><p><span style="font-size:18px">Given an array arr[] of size n, find the first repeating element. The element should occur more than once and the index of its first occurrence should be the smallest.</span></p>
 
 <p><span style="font-size:18px"><strong>Note:- </strong>The position you return should be according to 1-based indexing.&nbsp;</span></p>
 
