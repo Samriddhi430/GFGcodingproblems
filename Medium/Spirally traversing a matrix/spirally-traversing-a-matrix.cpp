@@ -9,43 +9,41 @@ class Solution
     //Function to return a list of integers denoting spiral traversal of matrix.
     vector<int> spirallyTraverse(vector<vector<int> > matrix, int r, int c) 
     {
-        vector<int> result;
-
-        int top = 0, bottom = r - 1, left = 0, right = c - 1;
-
-        while (top <= bottom && left <= right) {
-            // Traverse from left to right
-            for (int i = left; i <= right; ++i) {
-                result.push_back(matrix[top][i]);
-            }
-            top++;
-
-            // Traverse from top to bottom
-            for (int i = top; i <= bottom; ++i) {
-                result.push_back(matrix[i][right]);
-            }
-            right--;
-
-            // Traverse from right to left (if there are more rows)
-            if (top <= bottom) {
-                for (int i = right; i >= left; --i) {
-                    result.push_back(matrix[bottom][i]);
-                }
-                bottom--;
-            }
-
-            // Traverse from bottom to top (if there are more columns)
-            if (left <= right) {
-                for (int i = bottom; i >= top; --i) {
-                    result.push_back(matrix[i][left]);
-                }
-                left++;
-            }
+        vector<int> ans;
+        int row = 0, col = 0, idx = 0, k;
+        while(row<r && col<c) {
+            // Traverse left to right
+            for(k = col; k<c; k++)
+                // ans[idx++] = matrix[row][k];
+                ans.push_back(matrix[row][k]);
+            row++;
+            
+            // Traverse top to bottom
+            for(k=row; k<r; k++)
+                // ans[idx++] = matrix[k][c-1];
+                ans.push_back(matrix[k][c-1]);
+            c--;
+            
+            // Exit loop if traversed all elements
+            if(row == r || col == c)
+                break;
+                
+            // Traverse right to left
+            for(k=c-1; k>=col; k--)
+                // ans[idx++] = matrix[r-1][k];
+                ans.push_back(matrix[r-1][k]);
+            r--;
+            
+            // Traverse bottom to top
+            for(k=r-1; k>=row; k--)
+                // ans[idx++] = matrix[k][col];
+                ans.push_back(matrix[k][col]);
+            col++;
         }
-
-        return result;
-        // code here 
+        return ans;
     }
+        // code here 
+    
 };
 
 //{ Driver Code Starts.
