@@ -94,34 +94,31 @@ struct Node {
 */
 class Solution {
   public:
-  void findAns(Node *root1, Node *root2, vector<int> &ans){
-        if(root1== NULL && root2 == NULL){
-            return;
-        }
-        if(root1 == NULL && root2!=NULL){
-            findAns(root1,root2->left,ans);
-            ans.push_back(root2->data);
-            findAns(root1,root2->right,ans);
-        }else if(root2 == NULL && root1!=NULL){
-            findAns(root1->left,root2,ans);
-            ans.push_back(root1->data);
-            findAns(root1->right,root2,ans);
-        }else{
-            findAns(root1->left,root2->left,ans);
-             ans.push_back(root1->data);
-             ans.push_back(root2->data);
-             findAns(root1->right,root2->right,ans);
-            
-        }
+  void node(Node *root,vector<int>&res){
+        if(root==NULL)
+        return ;
+        node(root->left,res);
+        res.push_back(root->data);
+        node(root->right,res);
         
     }
     // Function to return a list of integers denoting the node
     // values of both the BST in a sorted order.
     vector<int> merge(Node *root1, Node *root2) {
-        vector<int> ans;
-         findAns(root1,root2,ans);
-         sort(ans.begin(),ans.end());
-         return ans;
+        vector<int>mer;
+        vector<int>res;
+        vector<int>res1;
+        node(root1,res);
+        node(root2,res1);
+        
+        for(auto it:res){
+            mer.push_back(it);
+        }
+        for(auto it:res1){
+            mer.push_back(it);
+        }
+        sort(mer.begin(),mer.end());
+        return mer;
         // Your code here
     }
 };
